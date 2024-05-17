@@ -1,11 +1,15 @@
-import { Container, RouterSlot } from "pig-fwk";
+import { Container, Inject, RouterSlot } from "pig-fwk";
+import { TokenizerSystem } from "../domain/systems/tokenizer/TokenizerSystem";
 
 export class Root extends Container {
+  private tokenizerSystem = Inject(TokenizerSystem);
+
   constructor() {
     super();
     this.fillScreen();
     this.cssClass(["bg-orange-50", "text-green-800"]);
     this.children([this.headerSlot(), this.contentLayout()]);
+    this.tokenizerSystem.start();
   }
 
   private headerSlot(): RouterSlot {

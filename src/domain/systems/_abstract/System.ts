@@ -1,11 +1,16 @@
+import { Observable, Subject } from "rxjs";
 import { Input } from "./inputs/Input";
 import { Output } from "./outputs/Output";
 import { Stock } from "./stocks/Stock";
+import { ControlSet } from "./controls/Conrol";
 
 export abstract class System {
     // Controls
     // Mutable properties of the system that can be changed
-    public controls: {[id:string]: any} = {};
+    protected controls: ControlSet = {};
+    protected outputSubject:Subject<Output[]> = new Subject();
+
+    public observeOutput:Observable<Output[]> = this.outputSubject.asObservable();
 
     // Constants
     // Properties of the system that cannot change
@@ -25,6 +30,9 @@ export abstract class System {
     // Outputs
     // Types: Data, Event, Control
     public outputBuffer: Output[] = [];
+    public output(outputs: Output[]): void {
+        this.outputSubject.next(outputs);
+    }
 
     // Behaviors
     // What the system dows with inputs, outputs, and connections
@@ -36,7 +44,7 @@ export abstract class System {
 
     // Stocks
     // Buffers that the system add to and draws from
-    public stocks: {[id:string]: Stock} = {};
+    protected stocks: {[id:string]: Stock} = {};
 
     // Actions
     // Methods that can be called on the system
