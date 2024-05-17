@@ -1,10 +1,11 @@
 import { Container, Inject, NumberInput } from "pig-fwk";
 import { Card } from "./card/Card.container";
 import { TokenizerSystem } from "../domain/systems/tokenizer/TokenizerSystem";
-import { Input } from "../domain/systems/_abstract/inputs/Input";
+import { DataInput, makeInput } from "../domain/systems/_abstract/inputs/Input";
 
 export class SystemCards extends Container {
   private tokenizerSystem = Inject<TokenizerSystem>(TokenizerSystem);
+  private makeDataInput = makeInput().makeDataInput;
   private add10 = new Card().content("Add 10");
   private add100 = new Card().content("Add 100");
   private controls = new Card().children([
@@ -62,7 +63,7 @@ export class SystemCards extends Container {
     this.add10.cssClass(["cursor-pointer"]);
     this.controls.cssClass(["gap-y-2"]);
     this.controls.getChildren().forEach((child) => {
-      child.cssClass(["w-48", "rounded", "bg-gray-600", "text-white", "p-2"]);
+      child.cssClass(["w-48", "rounded", "bg-white", "text-gray-600", "p-2"]);
     });
   }
 
@@ -70,27 +71,19 @@ export class SystemCards extends Container {
     this.add10.event("click", () => {
       console.log("Adding 10 tokens");
       let index: number = 0;
-      const tokens: Input[] = Array.from({ length: 10 }, () => {
-        return {
-          type: "Data",
-          name: `Token ${index}`,
-          value: `Token ${index}`,
-        };
+      const tokens: DataInput[] = Array.from({ length: 10 }, () => {
+        return this.makeDataInput(`Token ${index++}`);
       });
-      this.tokenizerSystem.input(tokens);
+      this.tokenizerSystem.data(tokens);
     });
 
     this.add100.event("click", () => {
       console.log("Adding 100 tokens");
       let index: number = 0;
-      const tokens: Input[] = Array.from({ length: 100 }, () => {
-        return {
-          type: "Data",
-          name: `Token ${index}`,
-          value: `Token ${index}`,
-        };
+      const tokens: DataInput[] = Array.from({ length: 100 }, () => {
+        return this.makeDataInput(`Token ${index++}`);
       });
-      this.tokenizerSystem.input(tokens);
+      this.tokenizerSystem.data(tokens);
     });
   }
 

@@ -7,7 +7,7 @@ export class Root extends Container {
   constructor() {
     super();
     this.fillScreen();
-    this.cssClass(["bg-orange-50", "text-green-800"]);
+    this.cssClass(["bg-orange-50", "text-gray-600"]);
     this.children([this.headerSlot(), this.contentLayout()]);
     this.tokenizerSystem.start();
   }
