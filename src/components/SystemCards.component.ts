@@ -1,10 +1,10 @@
 import { Container, Inject, NumberInput } from "pig-fwk";
 import { Card } from "./card/Card.container";
-import { TokenizerSystem } from "../domain/systems/tokenizer/TokenizerSystem";
+import { TokenStockSystem } from "../domain/systems/tokenizer/TokenizerSystem";
 import { DataInput, makeInput } from "../domain/systems/_abstract/inputs/Input";
 
 export class SystemCards extends Container {
-  private tokenizerSystem = Inject<TokenizerSystem>(TokenizerSystem);
+  private tokenizerSystem = Inject<TokenStockSystem>(TokenStockSystem);
   private makeDataInput = makeInput().makeDataInput;
   private add10 = new Card().content("Add 10");
   private add100 = new Card().content("Add 100");

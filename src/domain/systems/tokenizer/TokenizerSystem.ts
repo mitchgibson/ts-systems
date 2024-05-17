@@ -4,7 +4,7 @@ import { System } from "../_abstract/System";
 import { useTokenBehavior } from "./behaviors/StoreToken";
 import { TokenStock } from "./stocks/TokenStock";
 
-export class TokenizerSystem extends System {
+export class TokenStockSystem extends System {
   public controls: ControlSet = {
     interval: makeControl<number>(1000, {
       onChange: () => {

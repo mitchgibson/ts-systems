@@ -1,8 +1,8 @@
 import { Container, Inject, RouterSlot } from "pig-fwk";
-import { TokenizerSystem } from "../domain/systems/tokenizer/TokenizerSystem";
+import { TokenStockSystem } from "../domain/systems/tokenizer/TokenizerSystem";
 
 export class Root extends Container {
-  private tokenizerSystem = Inject(TokenizerSystem);
+  private tokenizerSystem = Inject(TokenStockSystem);
 
   constructor() {
     super();

@@ -1,12 +1,13 @@
 import { Inject } from "pig-fwk";
 import { System } from "../_abstract/System";
-import { TokenizerSystem } from "../tokenizer/TokenizerSystem";
+import { TokenStockSystem } from "../tokenizer/TokenizerSystem";
 import { LogOutput } from "../_abstract/outputs/Output";
 import { Subscription } from "rxjs";
 import { format } from "date-fns";
 
+// TODO: add concrete logger interface to contructor
 export class LoggerSystem extends System {
-  private tokenizerSystem = Inject<TokenizerSystem>(TokenizerSystem);
+  private tokenizerSystem = Inject<TokenStockSystem>(TokenStockSystem);
   private logSubscription?: Subscription;
 
   constructor() {
